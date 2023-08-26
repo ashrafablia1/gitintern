@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Intern Profile</title>
+    <link href="../static/css/style.css" th:href = "@{/css/style.css}" rel="stylesheet" media="screen">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 10px;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .main-p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      max-width: 1000px;
+      width: 90%;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+
+    p {
+      margin: 0 0 10px;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    span {
+      color: #ff0000;
+    }
+
+    input[type="submit"] {
+      padding: 10px 20px;
+      background-color: #3498db;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #2980b9;
+    }
+
+    @media only screen and (max-width: 600px) {
+      form {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+<div th:replace="~{header :: header}">Header</div>
+
+<div th:if="${param.resumeerror}">
+  <div class="alert alert-info">
+    there is an error uploading your resume. The size should be less than 10 MB.
+  </div>
+</div>
+
+<div class="main-p" th:if="${intern != null}">
+  <form th:action="@{/intern/profile/edit}" method="post" th:object="${intern}"  enctype="multipart/form-data" >
+    <p>
+      <strong>First Name:</strong>
+      <input type="text" th:field="*{firstName}" />
+      <span th:if="${intern.firstName == null}">No value available</span>
+    </p>
+    <p>
+      <strong>Last Name:</strong>
+      <input type="text" th:field="*{lastName}" />
+      <span th:if="${intern.lastName == null}">No value available</span>
+    </p>
+    <p>
+      <strong>Email:</strong>
+      <input type="email" th:field="*{email}" />
+      <span th:if="${intern.email == null}">No value available</span>
+    </p>
+    <p>
+      <strong>Phone Number:</strong>
+      <input type="tel" th:field="*{phoneNumber}" />
+      <span th:if="${intern.phoneNumber == null}">No value available</span>
+    </p>
+    <p>
+      <strong>Country:</strong>
+      <input type="text" th:field="*{country}" />
+      <span th:if="${intern.country == null}">No value available</span>
+    </p>
+
+    <p>
+      <strong>City:</strong>
+      <input type="text" th:field="*{city}" />
+      <span th:if="${intern.city == null}">No value available</span>
+    </p>
+
+    <div style="padding-bottom: 5px" class="form-group mt-3">
+      <label class="mr-4">Upload your Resume:</label>
+      <input type="file" name="file" accept=".pdf,.docx" onchange="validateFile(this)">
+    </div>
+
+
+
+    <p><input type="submit" value="Submit"/></p>
+  </form>
+</div>
+<script>
+  function validateFile(input) {
+    const maxSize = 10 * 1024 * 1024; // 10 MB in bytes
+    const file = input.files[0];
+
+    if (file.size > maxSize) {
+      alert("File size exceeds the limit of 10 MB.");
+      input.value = ''; // Clear the input field
+    }
+  }
+</script>
+
+</body>
+</html>

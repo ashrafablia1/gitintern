@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link href="../static/css/style.css" th:href = "@{/css/style.css}" rel="stylesheet" media="screen">
+
+</head>
+<body>
+<div class="job">
+    <div th:replace="~{header :: header}">Header</div>
+
+    <div class="wrapper">
+
+        <div class="main-container">
+
+            <div class="searched-jobs">
+                <div class="searched-bar">
+                    <div class="searched-sort">Sort by: <span class="post-time">Newest Post </span><span class="menu-icon">▼</span></div>
+                </div>
+
+        <div class="job-cards">
+
+        <div th:each="internship, iterStat : ${internships}">
+            <div class="job-card">
+                <div class="job-card-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" style="background-color:#f76754">
+                            <path xmlns="http://www.w3.org/2000/svg" d="M0 .5h4.2v23H0z" fill="#042b48" data-original="#212121" />
+                            <path xmlns="http://www.w3.org/2000/svg" d="M15.4.5a8.6 8.6 0 100 17.2 8.6 8.6 0 000-17.2z" fill="#fefefe" data-original="#f4511e" /></svg>
+
+                </div>
+                <div class="job-card-title" th:text="${internship.title}"></div>
+
+
+                <div class="job-card-subtitle" th:text="${internship.description}">
+                </div>
+
+
+                <div class="job-detail-buttons">
+                    <button class="search-buttons detail-button" th:text="${internship.location}"></button>
+                    <button class="search-buttons detail-button" th:text="${internship.paid ? 'Paid' : 'Unpaid'}"></button>
+                    <button class="search-buttons detail-button" th:text="${internship.remote ? 'Remote' : 'In-person'}"></button>
+                </div>
+                <div class="job-card-buttons">
+
+                    <a style="text-align: center;  text-decoration:none " th:href="@{/internship/{internshipId}(internshipId=${internship.internshipId})}" class="search-buttons card-buttons">
+                        View Details
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    </div>
+    </div>
+
+    </div>
+
+    </div>
+
+<script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
+</body>
+</html>

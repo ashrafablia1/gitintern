@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Internship</title>
+    <link href="../static/css/style.css" th:href = "@{/css/style.css}" rel="stylesheet" media="screen">
+</head>
+<body>
+<div th:replace="~{header :: header}">Header</div>
+
+<div>
+
+    <div class="job-explain">
+        <img class="job-bg" src="" alt="">
+        <div class="job-logos">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" style="background-color:#f76754">
+                <path xmlns="http://www.w3.org/2000/svg" d="M0 .5h4.2v23H0z" fill="#042b48" data-original="#212121"></path>
+                <path xmlns="http://www.w3.org/2000/svg" d="M15.4.5a8.6 8.6 0 100 17.2 8.6 8.6 0 000-17.2z" fill="#fefefe" data-original="#f4511e"></path>
+            </svg>
+        </div>
+        <div class="job-explain-content">
+            <div class="job-title-wrapper">
+                <div class="job-card-title" th:text="${internship.title}"></div>
+                <div class="job-action">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart heart">
+                        <path d="M20.8 4.6a5.5 5.5 0 00-7.7 0l-1.1 1-1-1a5.5 5.5 0 00-7.8 7.8l1 1 7.8 7.8 7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2">
+                        <circle cx="18" cy="5" r="3" />
+                        <circle cx="6" cy="12" r="3" />
+                        <circle cx="18" cy="19" r="3" />
+                        <path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4" />
+                    </svg>
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="job-subtitle-wrapper">
+                <div class="company-name">Comapny: <span class="comp-location" th:text="${internship.companyName}"></span> </div>
+                <!--not handled yet-->
+                <div class="posted">Posted 8 days ago<span class="app-number">98 Application</span></div>
+                <!--not handled yet-->
+
+            </div>
+            <div class="explain-bar">
+                <div class="explain-contents">
+                    <div class="explain-title">Is Paid</div>
+                    <div class="explain-subtitle" th:text="${internship.paid ? 'Yes' : 'No'}"></div>
+                </div>
+                <div class="explain-contents">
+                    <div class="explain-title">Number Of Positions</div>
+                    <div class="explain-subtitle" th:text="${internship.numberOfPositions}"></div>
+                </div>
+                <div class="explain-contents">
+                    <div class="explain-title">Is Remote</div>
+                    <div class="explain-subtitle" th:text="${internship.remote ? 'Yes' : 'No'}"></div>
+                </div>
+                <div class="explain-contents">
+                    <div class="explain-title">Application Deadline</div>
+                    <div class="explain-subtitle" th:text="${internship.applicationDeadline}"></div>
+                </div>
+                <div class="explain-contents">
+                    <div class="explain-title">Location</div>
+                    <div class="explain-subtitle" th:text="${internship.location}"></div>
+                </div>
+                <div class="explain-contents">
+                    <div class="explain-title">Duration</div>
+                    <div class="explain-subtitle" th:text="${internship.duration} + ' Months'"></div>
+                </div>
+                <div class="explain-contents">
+                    <div class="explain-title">Contact Email</div>
+                    <div class="explain-subtitle" th:text="${internship.contactEmail}"></div>
+                </div>
+
+            </div>
+            <div class="overview-text">
+                <div class="overview-text-header">Description</div>
+                <div class="overview-text-subheader" th:text="${internship.description}"></div>
+            </div>
+
+            <div class="overview-text">
+                <div class="overview-text-header">Requirements</div>
+                <div class="overview-text-subheader" th:text="${internship.requirements}"></div>
+            </div>
+
+            <div class="overview-text">
+                <div class="overview-text-header">Responsibilities</div>
+                <div class="overview-text-subheader" th:text="${internship.responsibilities}"></div>
+            </div>
+
+            <div class="overview-text">
+                <div class="overview-text-header">Qualifications</div>
+                <div class="overview-text-subheader" th:text="${internship.qualifications}"></div>
+            </div>
+
+        </div>
+        <div>
+            <div th:if="${owner}">
+            <a sec:authorize="hasAuthority('COMPANY')" style="margin: 40px;  text-decoration:none " class="search-buttons card-buttons " th:href="@{/company/internship/edit/{internshipId} (internshipId=${internship.internshipId})}" >Edit</a>
+            </div>
+            <a sec:authorize="isAnonymous()" style=" text-decoration:none " class="search-buttons card-buttons " th:href="@{/api/register/intern}" >Register to apply </a>
+            <div th:if="${applied}">
+            <a sec:authorize="hasAuthority('INTERN')" style=" text-decoration:none " class="search-buttons card-buttons " th:href="@{/intern/internship/apply/{internshipId} (internshipId=${internship.internshipId})}" >Apply </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    function getRandomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function setRandomImage() {
+        const number = Math.floor(Math.random() * 10);
+        const imageUrl = `https://unsplash.it/640/425?image=${number}`;
+        const imgElement = document.querySelector('.job-bg');
+        imgElement.src = imageUrl;
+    }
+
+    // Call the function to load a random image when the page loads
+    setRandomImage();
+</script>
+<script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
+</body>
+</html>

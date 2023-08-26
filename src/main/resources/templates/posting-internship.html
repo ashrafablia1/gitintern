@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post Internship</title>
+    <link href="../static/css/style.css" th:href = "@{/css/style.css}" rel="stylesheet" media="screen">
+</head>
+<body>
+
+<div th:replace="~{header :: header}">Header</div>
+
+
+
+<div class="job-explain">
+
+    <div class="job-explain-content">
+        <form th:action="@{/company/posting/internship}" method="post" th:object="${internshipDto}">
+
+
+
+            <div class="job-title-wrapper">
+                <label>Title: </label>
+                <label>
+                    <input type="text" th:field="*{title}" required />
+                </label>
+            </div>
+
+
+
+
+            <div class="explain-bar">
+                <div class="explain-contents">
+                    <div class="explain-title">Is Paid</div>
+                    <label>
+                        <input class="explain-subtitle" type="checkbox" th:field="*{paid}" />
+                    </label>
+                </div>
+                <div class="explain-contents">
+                    <div class="explain-title">Number Of Positions</div>
+                    <label>
+                        <input class="explain-subtitle" type="number" th:field="*{numberOfPositions}" required />
+                    </label>
+                </div>
+                <div class="explain-contents">
+                    <div class="explain-title">Is Remote</div>
+                    <label>
+                        <input class="explain-subtitle" type="checkbox" th:field="*{remote}"/>
+                    </label>
+                </div>
+                <div class="explain-contents">
+                    <div class="explain-title">Application Deadline</div>
+                    <label>
+                        <input class="explain-subtitle" type="date" th:field="*{applicationDeadline}" required />
+                    </label>
+                </div>
+                <div class="explain-contents">
+                    <div class="explain-title">Location</div>
+                    <label>
+                        <input class="explain-subtitle" type="text" th:field="*{location}" required />
+                    </label>
+                </div>
+                <div class="explain-contents">
+                    <div class="explain-title">Duration</div>
+                    <label>
+                        <input class="explain-subtitle" type="number" th:field="*{duration}" required /> Months
+                    </label>
+                </div>
+                <div class="explain-contents">
+                    <div class="explain-title">Contact Email</div>
+                    <label>
+                        <input class="explain-subtitle" type="email" th:field="*{contactEmail}" placeholder="not required" />
+                    </label>
+                </div>
+            </div>
+
+
+
+            <div class="overview-text">
+                <div class="overview-text-header">Description</div>
+                <label>
+                    <textarea style=" height: 100px;  width: 500px;" class="overview-text-subheader" th:field="*{description}" required></textarea>
+                </label>
+            </div>
+
+
+
+            <div class="overview-text">
+                <div class="overview-text-header">Requirements</div>
+                <label>
+                    <textarea style=" height: 100px;  width: 500px;" class="overview-text-subheader" th:field="*{requirements}" required></textarea>
+                </label>
+            </div>
+
+
+
+
+            <div class="overview-text">
+                <div class="overview-text-header">Responsibilities</div>
+                <label>
+                    <textarea style=" height: 100px;  width: 500px;" class="overview-text-subheader" th:field="*{responsibilities}" required></textarea>
+                </label>
+            </div>
+
+
+
+
+            <div class="overview-text">
+                <div class="overview-text-header">Qualifications</div>
+                <label>
+                    <textarea style=" height: 100px;  width: 500px;" class="overview-text-subheader" th:field="*{qualifications}" required></textarea>
+                </label>
+            </div>
+
+            <div>
+                <button style="width: 300px;" class="search-buttons card-buttons" type="submit">save changes</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+<script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Company Profile</title>
+  <link href="../static/css/style.css" th:href = "@{/css/style.css}" rel="stylesheet" media="screen">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 10px;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      max-width: 1000px;
+      width: 90%;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+
+    p {
+      margin: 0 0 10px;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    span {
+      color: #ff0000;
+    }
+
+    input[type="submit"] {
+      padding: 10px 20px;
+      background-color: #3498db;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #2980b9;
+    }
+
+    @media only screen and (max-width: 600px) {
+      form {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div th:replace="~{header :: header}">Header</div>
+
+<div th:if="${company != null}">
+
+  <form th:action="@{/company/profile/edit}" method="post" th:object="${company}">
+    <p>
+      <strong>Company Name:</strong>
+      <input type="text" th:field="*{name}" />
+      <span th:if="${company.name == null}">No value available</span>
+    </p>
+
+    <p>
+    <p>
+      <strong>Company Link:</strong>
+      <input type="text" th:field="*{companyLink}" />
+      <span th:if="${company.companyLink == null}">No value available</span>
+    </p>
+
+      <strong>Phone Number:</strong>
+      <input type="tel" th:field="*{phoneNumber}" />
+      <span th:if="${company.phoneNumber == null}">No value available</span>
+    </p>
+    <p>
+      <strong>Country:</strong>
+      <input type="text" th:field="*{country}" />
+      <span th:if="${company.country == null}">No value available</span>
+    </p>
+
+    <p>
+      <strong>City:</strong>
+      <input type="text" th:field="*{city}" />
+      <span th:if="${company.city == null}">No value available</span>
+    </p>
+    <p><input type="submit" value="Submit"/></p>
+  </form>
+</div>
+
+</body>
+</html>

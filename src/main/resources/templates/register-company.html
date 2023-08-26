@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Register Company</title>
+    <link href="../static/css/login.css" th:href = "@{/css/login.css}" rel="stylesheet" media="screen">
+    <link href="../static/css/style.css" th:href = "@{/css/style.css}" rel="stylesheet" media="screen">
+
+
+</head>
+<body>
+<div th:replace="~{header :: header}">Header</div>
+
+<div class="container">
+    <div class="screen">
+        <div class="screen__content">
+
+            <form class="login"
+                method="post"
+                role="form"
+                th:action="@{/api/register/company}"
+                th:object="${company}">
+
+
+                <h1>Company Registration</h1>
+                <div th:if="${param.success}">
+                    <div class="alert alert-info">
+                        Registration successful!  Please verify your email
+                    </div>
+                </div>
+                <div th:if="${param.errorregister}">
+                    <div  style="color: red" class="alert alert-info">Email Already Registered !!!</div>
+                </div>
+
+                <div class="login__field">
+                    <i class="login__icon fas fa-user"></i>
+                    <input id="name" name="name" type="text" class="login__input" placeholder="Company Name">
+                    <p class="text-danger" th:errors="*{name}"
+                       th:if="${#fields.hasErrors('name')}"></p>
+                </div>
+
+
+                <div class="login__field">
+                    <i class="login__icon fas fa-user"></i>
+                    <input id="email" name="email" type="email" class="login__input" placeholder="Email">
+                    <p class="text-danger" th:errors="*{email}"
+                       th:if="${#fields.hasErrors('email')}"></p>
+                </div>
+                <div class="login__field">
+                    <i class="login__icon fas fa-lock"></i>
+                    <input id="password" name="password" type="password" class="login__input" placeholder="Password">
+                    <p class="text-danger" th:errors="*{password}"
+                       th:if="${#fields.hasErrors('password')}"></p>
+                </div>
+                <button class="button buttons_st">
+                    <span class="button__text">Register Now</span>
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+            </form>
+        </div>
+        <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4"></span>
+            <span class="screen__background__shape screen__background__shape3"></span>
+            <span class="screen__background__shape screen__background__shape2"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+        </div>
+    </div>
+</div>
+<script>const toggleButton = document.querySelector(".dark-light");
+
+toggleButton.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+});</script>
+<script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
+</body>
+</html>

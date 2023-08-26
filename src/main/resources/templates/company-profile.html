@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Company Profile</title>
+    <link href="../static/css/style.css" th:href = "@{/css/style.css}" rel="stylesheet" media="screen">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        p {
+            margin-top: 10px;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        span {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff; /* Nice blue color */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            max-width: 200px;
+        }
+
+        .button:hover {
+            background-color: #0056b3; /* Darker shade of blue on hover */
+        }
+
+        .internships-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+
+        }
+
+        .internship-box {
+            margin: 10px;
+            padding: 20px;
+            background-color: #f0f0f0; /* Light gray background color */
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 500px;
+        }
+
+        /* Media Queries */
+        @media only screen and (max-width: 600px) {
+            form {
+                width: 80%;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{header :: header}">Header</div>
+
+<h1>Company Profile</h1>
+
+
+<div th:if="${company != null}">
+    <form>
+        <p>
+            <strong>Company Name:</strong>
+            <span th:text="${company.name}"></span>
+            <span th:unless="${company.name != null}">No value available</span>
+        </p>
+        <p>
+            <strong>company Email:</strong>
+            <span th:text="${company.email}"></span>
+            <span th:unless="${company.email != null}">No value available</span>
+        </p>
+        <p>
+            <strong>Company Link:</strong>
+            <a th:href="${company.companyLink}" th:text="${company.companyLink}"></a>
+            <span th:unless="${company.companyLink != null}">No value available</span>
+        </p>
+
+        <p>
+            <strong>Phone Number:</strong>
+            <span th:text="${company.phoneNumber}"></span>
+            <span th:unless="${company.phoneNumber != null}">No value available</span>
+        </p>
+        <p>
+            <strong>Country:</strong>
+            <span th:text="${company.country}"></span>
+            <span th:unless="${company.country != null}">No value available</span>
+        </p>
+        <p>
+            <strong>City:</strong>
+            <span th:text="${company.city}"></span>
+            <span th:unless="${company.city != null}">No value available</span>
+        </p>
+    </form>
+
+    <div class="button-container">
+        <button id="submitLink" class="button" type="button">Edit Profile</button>
+    </div>
+</div>
+
+
+
+<script>
+    // Get the URL of the current page
+    let currentUrl = window.location.href;
+
+    // Extract the internId from the URL
+    let internId = currentUrl.split('/').pop();
+
+    // Create the new URL for the Submit link
+    let submitUrl = '/company/profile/edit';
+
+    // Update the href attribute of the Submit link
+    document.getElementById('submitLink').addEventListener('click', function() {
+        window.location.href = submitUrl;
+    });
+
+</script>
+
+</body>
+</html>

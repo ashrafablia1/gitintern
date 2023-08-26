@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Apply</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&display=swap" rel="stylesheet">
+  <link href="../static/css/apply.css" th:href = "@{/css/apply.css}" rel="stylesheet" media="screen">
+  <link href="../static/css/style.css" th:href = "@{/css/style.css}" rel="stylesheet" media="screen">
+
+</head>
+<body>
+<div th:replace="~{header :: header}">Header</div>
+
+
+<div id="main-container">
+
+    <h2 id="title">Apply to Internship: <span th:text="${internshipTitle}"></span></h2>
+    <div th:if="${param.success}">
+      <div class="alert alert-info">
+        Applied successful !!!
+      </div>
+    </div>
+
+  <form id="form-container" th:action="@{/intern/internship/apply/{internshipId}(internshipId=${internshipId})}" method="post" th:object="${intern}"  enctype="multipart/form-data">
+
+    <!-- NAME -->
+    <div class="question-container">
+      <label id="name-label" class="question-label" for="name">First Name:</label>
+      <input id="name" class="row-input" type="text" th:field="*{firstName}"th:value="${intern.firstName}" placeholder="Enter your first name" required>
+    </div>
+
+    <div class="question-container">
+      <label id="name-label" class="question-label" for="name">Last Name:</label>
+      <input id="name" class="row-input" type="text" th:field="*{lastName}" placeholder="Enter your last name" required>
+    </div>
+
+    <!-- EMAIL -->
+    <div class="question-container">
+      <label id="email-label" class="question-label" for="email">Email:</label>
+      <input id="email" class="row-input" type="email"  th:field="*{email}" placeholder="Enter your email" required>
+    </div>
+
+
+    <div class="question-container">
+      <label id="name-label" class="question-label" for="name">Phone Number:</label>
+      <input id="name" class="row-input" type="text" th:field="*{phoneNumber}" placeholder="Enter your phone Number" required>
+    </div>
+
+    <div class="question-container">
+      <label id="name-label" class="question-label" for="name">Country:</label>
+      <input id="name" class="row-input" type="text" th:field="*{country}" placeholder="Enter your Country" required>
+    </div>
+
+
+    <div class="question-container">
+      <label id="name-label" class="question-label" for="name">City:</label>
+      <input id="name" class="row-input" type="text" th:field="*{city}" placeholder="Enter your City" required>
+    </div>
+
+    <div>
+      <div th:if="${resumeFound}">
+        Resume:   <a th:href="${resumeUrl}" download="${resumeFileName}" th:text="${resumeViewName}">
+      </a>
+      </div>
+
+      <div th:unless="${resumeFound}">
+        <p>No resume found for this intern</p>
+      </div>
+
+      <div class="form-group mt-3">
+        <label class="mr-4">Upload new Resume:</label>
+        <input type="file" name="file">
+      </div>
+    </div>
+
+
+    <!-- SUBMIT -->
+    <button id="submit" type="submit">Submit</button>
+
+  </form>
+
+</div>
+</body>
+</html>

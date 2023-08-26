@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Application</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&display=swap" rel="stylesheet">
+  <link href="../static/css/apply.css" th:href = "@{/css/apply.css}" rel="stylesheet" media="screen">
+  <link href="../static/css/style.css" th:href = "@{/css/style.css}" rel="stylesheet" media="screen">
+
+</head>
+<body>
+<div th:replace="~{header :: header}">Header</div>
+
+
+<div id="main-container">
+
+  <h2 id="title"> <span th:text="${internshipApplication.internship.title}"></span></h2>
+
+
+  <div class="question-container">
+    <label id="name-label" class="question-label" for="name">Status:</label>
+    <span  class="row-input" id="name"  th:text="${internshipApplication.status}"></span>
+  </div>
+
+    <!-- NAME -->
+    <div class="question-container">
+      <label id="name-label" class="question-label" for="name">First Name:</label>
+      <span  class="row-input" th:text="${internshipApplication.firstName}"></span>
+    </div>
+
+    <div class="question-container">
+      <label id="name-label" class="question-label" for="name">Last Name:</label>
+      <span  class="row-input" th:text="${internshipApplication.lastName}"></span>
+    </div>
+
+    <!-- EMAIL -->
+    <div class="question-container">
+      <label id="email-label" class="question-label" for="email">Email:</label>
+      <span  class="row-input" id="email" th:text="${internshipApplication.email}"></span>
+    </div>
+
+
+    <div class="question-container">
+      <label id="name-label" class="question-label" for="name">Phone Number:</label>
+      <span  class="row-input" th:text="${internshipApplication.phoneNumber}"></span>
+    </div>
+
+    <div class="question-container">
+      <label id="name-label" class="question-label" for="name">Country:</label>
+      <span  class="row-input" th:text="${internshipApplication.country}"> </span>
+    </div>
+
+
+    <div class="question-container">
+      <label id="name-label" class="question-label" for="name">City:</label>
+      <span  class="row-input" id="name" th:text="${internshipApplication.city}"></span>
+    </div>
+
+    <div class="question-container">
+      <div  th:if="${resumeFound}">
+        <label id="name-label" class="question-label" for="name">Resume:</label>
+           <a class="row-input" id="name" th:href="${resumeUrl}" download="${resumeFileName}" th:text="${resumeViewName}">
+      </a>
+      </div>
+
+      <div th:unless="${resumeFound}">
+        <p>No resume found for this intern</p>
+      </div>
+    </div>
+
+
+
+  <form class="question-container" th:if="${owner}" th:action="@{/company/application/{internshipApplicationId}/status(internshipApplicationId=${internshipApplication.getId()})}" method="post">
+    <input type="hidden" name="internshipId" th:value="${internshipApplication.internship.internshipId}" />
+    <select style="background-color: #749fec" class="row-input" name="status">
+      <option value="ACCEPTED" th:selected="${internshipApplication.status == 'ACCEPTED'}">ACCEPTED</option>
+      <option value="REJECTED" th:selected="${internshipApplication.status == 'REJECTED'}">REJECTED</option>
+    </select>
+
+    <button type="submit">Update Status</button>
+  </form>
+
+
+</div>
+</body>
+</html>
