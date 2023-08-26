@@ -18,6 +18,14 @@ Model-View-Controller (MVC):
 • View
 • DTOs (Data Transfer Objects)
 
+*Demo:
+GitIntern: [gitintern.tech](https://gitintern.tech/)
+Company user: gitintern.company1@gmail.com
+Intern user:  gitintern.intern1@gmail.com
+password: 2468 
+
+note: demo is not responsive or not friendly view on smaller devices, such as phones
+
 
 # FULL OVERVIEW
 1. Anonymous User Main Page:
