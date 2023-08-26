@@ -20,9 +20,9 @@ Model-View-Controller (MVC):
 
 *Demo:
 GitIntern: [gitintern.tech](https://gitintern.tech/)
--Company user: gitintern.company1@gmail.com
--Intern user:  gitintern.intern1@gmail.com
--password: 2468 
+- Company user: gitintern.company1@gmail.com
+- Intern user:  gitintern.intern1@gmail.com
+- password: 2468 
 
 note: demo is not responsive or not friendly view on smaller devices, such as phones
 
